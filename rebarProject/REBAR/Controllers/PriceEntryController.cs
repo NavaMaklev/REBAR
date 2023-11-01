@@ -9,15 +9,12 @@ namespace REBAR.Controllers
     public class PriceEntryController : ControllerBase
     {
         private readonly PriceEntryService _priceEntryService;
-
         public PriceEntryController(PriceEntryService priceEntryService)
         {
             _priceEntryService = priceEntryService;
         }
-
         [HttpGet]
         public ActionResult<List<PriceEntry>> GetAll() => _priceEntryService.GetAll();
-
         [HttpGet("{size}", Name = "GetBySize")]
         public ActionResult<PriceEntry> GetBySize(char size)
         {
@@ -38,13 +35,11 @@ namespace REBAR.Controllers
             }
             return Ok(priceEntry);
         }
-
         [HttpPost]
         public ActionResult<PriceEntry> Create(PriceEntry priceEntry)
         {
             priceEntry.Id = Guid.NewGuid();
             var existingPriceEntry = _priceEntryService.GetBySizeAndIsSpecial(priceEntry.Size, priceEntry.IsSpecial);
-
             if (existingPriceEntry != null)
             {
                 return BadRequest("A price for this size in this branch already exists. Please update the price using the appropriate function.");
@@ -52,7 +47,6 @@ namespace REBAR.Controllers
             _priceEntryService.Create(priceEntry);
             return CreatedAtRoute(nameof(GetBySize), new { size = priceEntry.Size }, priceEntry);
         }
-
         [HttpPut("{size}")]
         public IActionResult Update(char size, PriceEntry priceEntry)
         {
@@ -61,11 +55,9 @@ namespace REBAR.Controllers
             {
                 return NotFound();
             }
-
             _priceEntryService.Update(size, priceEntry);
             return NoContent();
         }
-
         [HttpDelete("{size}")]
         public IActionResult Delete(char size)
         {
@@ -74,10 +66,8 @@ namespace REBAR.Controllers
             {
                 return NotFound();
             }
-
             _priceEntryService.Remove(size);
             return NoContent();
         }
     }
-
 }

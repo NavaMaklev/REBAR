@@ -11,21 +11,15 @@ namespace REBAR.Controllers
     {
         private readonly OrderService _orderService;
         private readonly PaymentService _paymentService;
-        private readonly ShakeService _shakeService;
-        private readonly PriceEntryService _priceEntryService;
         private readonly BranchAccountService _branchAccountService;
-        public OrderController(OrderService orderService, PaymentService paymentService, ShakeService shakeService, PriceEntryService priceEntryService, BranchAccountService branchAccountService)
+        public OrderController(OrderService orderService, PaymentService paymentService, BranchAccountService branchAccountService)
         {
             _orderService = orderService;
             _paymentService = paymentService;
-            _shakeService = shakeService;
-            _priceEntryService = priceEntryService;
             _branchAccountService = branchAccountService;
         }
-
         [HttpGet]
         public ActionResult<List<Order>> GetAll() => _orderService.GetAll();
-
         [HttpGet("{id}", Name = "GetOrder")]
         public ActionResult<Order> GetById(string id)
         {
@@ -69,23 +63,19 @@ namespace REBAR.Controllers
         [HttpPost("pay")]
         public ActionResult Pay(Order order)
         {
-
             bool paymentSucceeded = _paymentService.ProcessPayment(order);
 
             if (!paymentSucceeded)
             {
                 return BadRequest("Payment failed.");
             }
-
             var payment = new Payment
             {
                 OrderId = order.Id.ToString(),
                 PaymentDate = DateTime.Now,
                 PaymentAmount=order.TotalPrice
             };
-
             _paymentService.Create(payment);
-
             return Ok();
         }
         

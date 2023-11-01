@@ -31,6 +31,10 @@ namespace REBAR.Controllers
 
             return branchAccount;
         }
+        /*working premise:
+         * On the client's side, the employee will have to enter the branch's password
+         * and only then will he be able to close the checkout
+         */
         [HttpPost("closeAccount/{branchId}")]
         public ActionResult CloseAccount(Guid branchId)
         {
