@@ -30,6 +30,7 @@ namespace REBAR
             builder.Services.AddScoped<PriceTableService>();
             builder.Services.AddScoped<MenuService>();
             builder.Services.AddScoped<PaymentService>();
+            builder.Services.AddScoped<BranchAccountService>();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();

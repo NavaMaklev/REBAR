@@ -2,6 +2,7 @@
 {
     public class UserInput
     {
+        public Guid BranchID { get; set; }
         public string CustomerName { get; set; }
         public List<OrderedShake> Shakes { get; set; }
         public Discount Discount { get; set; }

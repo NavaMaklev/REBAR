@@ -15,7 +15,7 @@ namespace REBAR.Models
         public DateTime CompletionTime { get; set; }
         [Required]
         [MaxLength(10)]
-        public List<Guid> ShakesId { get; set; } // List of shakes ordered.
+        public List <string> ShakesId { get; set; } // List of shakes ordered.
         public decimal TotalPrice { get; set; }
         public decimal FinalPrice { get; set; }
         public Discount Discounts { get; set; } // Discounts or offers applied to this order.
