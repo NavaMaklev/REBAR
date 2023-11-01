@@ -42,7 +42,25 @@ function fetchShakes() {
             console.error("Error fetching shakes:", error);
         });
 }
-
+ function branchs () {
+    fetch('https://localhost:7202/api/BranchAccounts') 
+        .then(response => response.json())
+        .then(data => {
+            const branchesContainer = document.getElementById('branches');
+            data.forEach(branch => {
+                document.querySelector("#branches").innerHTML += `<button onclick="password('branch.managerPassword')">${branch.branchId}</button>`;
+            });
+        });
+}
+function valid(password) {
+    if (document.querySelector("#input").value == 'jjjj') {
+        window.location.href = "inMyBranch.html";
+    }
+}
+function password(password) {
+    document.querySelector("#branches").innerHTML = `password: <input oninput="valid('password')" id="input" type="text" required>`;
+    
+}
 function placeOrder(event) {
     event.preventDefault();
 
@@ -69,4 +87,5 @@ function placeOrder(event) {
             console.error("Error placing order:", error);
         });
 }
+
 

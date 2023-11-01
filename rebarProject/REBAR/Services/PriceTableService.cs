@@ -12,7 +12,6 @@ namespace REBAR.Services
         }
         public PriceTable GetPriceTable()
         {
-
             var allPrices = _priceEntryService.GetAll();
             var regularPrices = allPrices.Where(p => !p.IsSpecial).ToList();
             var specialPrices = allPrices.Where(p => p.IsSpecial).ToList();

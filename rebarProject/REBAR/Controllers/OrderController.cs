@@ -56,38 +56,7 @@ namespace REBAR.Controllers
             if (!_orderService.IsValidDiscountAndSale(orderInput.Discount,orderInput.Sale))
             {
                 return BadRequest("The discount/sale must be a positive number,sale must be a positive number between 0 to 100");
-            }
-            //List<Guid> shakesID = new List<Guid>();
-            //decimal totalPrice=0;
-            //foreach (var shakeSelection in orderInput.Shakes)
-            //{
-            //    Shake currentShake = _shakeService.GetByName(shakeSelection.Shake);
-            //    if (currentShake == null)
-            //    {
-            //        return BadRequest($"Shake {shakeSelection.Shake} not found.");
-            //    }
-            //    PriceEntry price = _priceEntryService.GetBySizeAndIsSpecial(shakeSelection.Size, currentShake.IsSpecial);
-            //    if(shakeSelection.Quantity==0)
-            //    {
-            //        return BadRequest("You must select Quantity.");
-            //    }
-            //    shakesID.Add(currentShake.Id);
-            //    totalPrice += shakeSelection.Quantity * price.Price;
-            //}
-            //var finalPrice = orderInput.Discount.CalculatePrice(totalPrice);
-            //finalPrice=orderInput.Sale.CalculatePrice(finalPrice);
-            //Order newOrder = new Order
-            //{
-            //    Id = Guid.NewGuid(),
-            //    CustomerName = orderInput.CustomerName,
-            //    Date = created,
-            //    ShakesId = shakesID,
-            //    CompletionTime= DateTime.Now,
-            //    TotalPrice= totalPrice,
-            //    FinalPrice= finalPrice,
-            //    Discounts=orderInput.Discount,
-            //    Sale=orderInput.Sale,
-            //};            
+            }           
             Order newOrder =_orderService. CreateOrderFromInput(orderInput);
             if (!_branchAccountService.AddOrderToBranchAccount(newOrder,orderInput.BranchID))
                 return BadRequest("You are trying to add an order to a branch that does not exist");

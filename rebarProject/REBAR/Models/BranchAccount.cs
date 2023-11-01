@@ -2,6 +2,8 @@
 using MongoDB.Bson.Serialization.Attributes;
 using REBAR.Services;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
 namespace REBAR.Models
 {
     public class BranchAccount
@@ -9,6 +11,7 @@ namespace REBAR.Models
         [BsonId]
         [BsonRepresentation(BsonType.String)]
         public Guid BranchId { get; set; }
+        [Required]
         public string ManagerPassword { get; set; }
         public List<Order> Orders { get; set; }
         public decimal TotalAmount { get; set; }
